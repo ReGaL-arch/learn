@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Я хочу научиться</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@700;800&display=swap">
+<style>
+:root{--bg:#09090c;--fg:#fff;--mut:#9a9aaa;--card:#121218;--bd:#2a2a36;--ac:#e8723a;--line:200,200,220;box-sizing:border-box}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f7f6f3;--fg:#111;--mut:#5d5d6b;--card:#fff;--bd:#dcdbd5;--ac:#c9501c;--line:90,90,110}}
+:root[data-theme="dark"]{--bg:#09090c;--fg:#fff;--mut:#9a9aaa;--card:#121218;--bd:#2a2a36;--ac:#e8723a;--line:200,200,220}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;overflow:hidden}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block}
+.c{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;pointer-events:none;padding:0 16px}
+h1{font-family:Raleway,Inter,system-ui,sans-serif;font-weight:800;font-size:clamp(44px,8.5vw,92px);line-height:1.05;text-align:center;margin:0 0 26px;letter-spacing:-.02em;text-shadow:0 0 30px var(--bg),0 0 12px var(--bg)}
+input{pointer-events:auto;width:min(450px,92vw);padding:14px 16px;font-size:17px;color:var(--fg);background:color-mix(in srgb,var(--card) 92%,transparent);border:1px solid var(--bd);border-radius:10px;outline:none;font-family:inherit;transition:border-color .2s,box-shadow .2s}
+input:focus{border-color:var(--ac);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac) 28%,transparent)}
+#p{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--card);border-left:1px solid var(--bd);padding:calc(28px + env(safe-area-inset-top,0px)) 26px 28px;overflow-y:auto;transform:translateX(105%);transition:transform .4s cubic-bezier(.2,.8,.2,1);z-index:5}
+#p.on{transform:none}
+#p h2{margin:0 0 10px;font-family:Raleway,Inter,sans-serif;font-size:34px}
+#p p{color:var(--mut);line-height:1.55;margin:0 0 18px}
+#p h3{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ac);margin:22px 0 8px}
+#p ol{margin:0;padding-left:20px;line-height:1.7}
+#x{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;background:none;border:0;color:var(--mut);font-size:28px;cursor:pointer}
+.l a{display:inline-block;margin:0 8px 8px 0;padding:8px 14px;border:1px solid var(--bd);border-radius:99px;color:var(--fg);text-decoration:none;font-size:14px;transition:.2s}
+.l a:hover{border-color:var(--ac);color:var(--ac)}
+.r span{display:inline-block;margin:0 8px 8px 0;padding:6px 12px;border-radius:99px;background:color-mix(in srgb,var(--ac) 16%,transparent);cursor:pointer;font-size:14px}
+</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div class="c"><h1>Я хочу<br>научиться</h1><input id="q" placeholder="" autocomplete="off" aria-label="Тема"></div>
+<aside id="p"><button id="x" aria-label="Закрыть">×</button><div id="pc"></div></aside>
+<script>
+const T="Math,Databases,Blockchain,Physics,JavaScript,Python,Rust,Music,Web,Hardware,Networking,Drugs,Art,Sleep,Fitness,Investing,Photography,Machine learning,Data Science,Game engines,Distributed systems,Unix,Linux,Browsers,Security,Cryptography,Design,Product Management,Economics,Philosophy,Psychology,Chemistry,Biology,Astronomy,Statistics,Algorithms,Compilers,Operating systems,Graphics,Virtual reality,Robotics,Electronics,Architecture,Writing,Languages,History,Cooking,Chess,Guitar,Drawing,3D modeling,Animation,Video editing,Marketing,Startups,Leadership,Communication,Meditation,Nutrition,Neuroscience,Genetics,Climate,Energy,Aerospace,Open source,Git,Docker,Kubernetes,Cloud,APIs,React,TypeScript,CSS,Swift,Go,SQL,GraphQL,WebGPU,Type theory,Number theory,Logic,Topology,Probability,Linear algebra,Calculus,Optics,Quantum computing,Self hosting,Automation,Generative art,Typography,Sketching,Game development,Raspberry Pi,Neural networks,Law,Finance,Negotiation,Public speaking".split(",");
+const D={Math:"Язык, на котором описаны физика, программирование и экономика. Начните с логики и алгебры, затем переходите к анализу.",Python:"Простой и мощный язык для скриптов, данных и ИИ. Отлично подходит для первого языка программирования.",Blockchain:"Распределённый реестр, где записи защищены криптографией. Важно понять хеши, консенсус и транзакции.",Music:"Ритм, гармония и слух. Выберите инструмент и занимайтесь по 15 минут каждый день.",Physics:"Наука о том, как устроен мир: от движения тел до полей и частиц.",Databases:"Способы хранить и быстро находить данные. Начните с SQL и понятия индекса.",Chess:"Дебюты, тактика, эндшпиль. Сначала решайте задачи на тактику, потом разбирайте партии.",Sleep:"Режим сна влияет на память и настроение. Изучите циклы сна и гигиену сна.",Investing:"Вложение денег ради роста капитала. Разберитесь с риском, диверсификацией и горизонтом.","Machine learning":"Алгоритмы, которые учатся на данных. Начните со статистики и линейной регрессии.",JavaScript:"Язык веба: работает в браузере и на сервере. Освойте DOM, асинхронность и модули.",Art:"Наблюдение, композиция, цвет. Ежедневные наброски дают самый быстрый прогресс.",Photography:"Свет, композиция, экспозиция. Снимайте каждый день и разбирайте свои кадры."};
+const PAL=["#d9534f","#e0663f","#e8923a","#c9a24a","#a9a9b8"],HUB=new Set(["Math","Databases","Blockchain","Physics","JavaScript","Music","Web","Hardware","Machine learning","Data Science","Networking","Art"]);
+const cv=document.getElementById('cv'),ctx=cv.getContext('2d'),q=document.getElementById('q'),P=document.getElementById('p'),PC=document.getElementById('pc');
+const N=T.map((n,i)=>{const u=Math.random()*2-1,th=Math.random()*6.283,r=(.3+Math.random()*.7)*700,s=Math.sqrt(1-u*u);return{n,x:r*s*Math.cos(th)*1.6,y:r*u,z:r*s*Math.sin(th),h:HUB.has(n),c:PAL[i%5],ph:Math.random()*6.28,nb:[]}});
+const E=[],seen=new Set();
+function ed(a,b){if(a===b)return;const k=a<b?a+"-"+b:b+"-"+a;if(seen.has(k))return;seen.add(k);E.push([a,b]);N[a].nb.push(b);N[b].nb.push(a)}
+N.forEach((a,i)=>{const d=N.map((b,j)=>[j,(a.x-b.x)**2+(a.y-b.y)**2+(a.z-b.z)**2]).filter(v=>v[0]!==i).sort((m,n)=>m[1]-n[1]);ed(i,d[0][0]);ed(i,d[1][0]);if(a.h)for(let k=0;k<7;k++)ed(i,Math.floor(Math.random()*N.length))});
+let W,H,dpr,mx=.5,my=.5,yaw=0,pit=0,hov=-1,filt="",bgc="#09090c",F=1100;
+function rs(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);bgc=getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()}
+addEventListener('resize',rs);matchMedia('(prefers-color-scheme:dark)').addEventListener('change',()=>setTimeout(rs,50));rs();
+addEventListener('pointermove',e=>{mx=e.clientX/W;my=e.clientY/H;pick(e.clientX,e.clientY)});
+const red=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const R=[];
+function pick(x,y){hov=-1;let bz=1e9;R.forEach(r=>{if(x>=r.x-4&&x<=r.x+r.w+4&&y>=r.y-4&&y<=r.y+r.h+4&&r.z<bz){bz=r.z;hov=r.i}});cv.style.cursor=hov>=0?'pointer':'default'}
+cv.addEventListener('click',e=>{pick(e.clientX,e.clientY);if(hov>=0)openT(N[hov].n);else P.classList.remove('on')});
+function frame(t){requestAnimationFrame(frame);t/=1000;const k=red?0:1;
+ yaw+=((mx-.5)*1.1+Math.sin(t*.12)*.25*k-yaw)*.05;pit+=((my-.5)*.6-pit)*.05;
+ const cy=Math.cos(yaw),sy=Math.sin(yaw),cp=Math.cos(pit),sp=Math.sin(pit);
+ ctx.fillStyle=bgc;ctx.fillRect(0,0,W,H);
+ const S=N.map(a=>{const x=a.x+Math.sin(t*.5+a.ph)*14*k,y=a.y+Math.cos(t*.4+a.ph)*14*k;
+  const x1=x*cy+a.z*sy,z1=-x*sy+a.z*cy,y1=y*cp-z1*sp,z2=y*sp+z1*cp,s=F/(F+z2);return{x:W/2+x1*s*(W/1400+.35),y:H/2+y1*s*(W/1400+.35),s,z:z2}});
+ const lc=getComputedStyle(document.documentElement).getPropertyValue('--line').trim();
+ ctx.lineWidth=1;
+ E.forEach(([a,b])=>{const A=S[a],B=S[b],on=hov===a||hov===b;ctx.strokeStyle=on?'rgba(232,114,58,.85)':`rgba(${lc},${.1*(A.s+B.s)/2})`;ctx.lineWidth=on?1.5:1;ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);ctx.stroke()});
+ R.length=0;
+ const ord=N.map((_,i)=>i).sort((a,b)=>S[b].z-S[a].z);
+ ord.forEach(i=>{const a=N[i],p=S[i],sz=(a.h?19:13)*p.s,m=!filt||a.n.toLowerCase().includes(filt),nbH=hov>=0&&N[hov].nb.includes(i);
+  ctx.font=`${hov===i?'700 ':''}${sz}px Inter,system-ui,sans-serif`;ctx.textBaseline='top';
+  const w=ctx.measureText(a.n).width;
+  ctx.globalAlpha=m?(hov===i||nbH?1:Math.min(1,.4+p.s*.4)):.1;ctx.fillStyle=hov===i?'#fff':a.c;
+  if(hov===i&&getComputedStyle(document.documentElement).getPropertyValue('--bg').trim()[1]>'a')ctx.fillStyle='#c9501c';
+  ctx.fillText(a.n,p.x-w/2,p.y-sz/2);R.push({i,x:p.x-w/2,y:p.y-sz/2,w,h:sz,z:p.z})});
+ ctx.globalAlpha=1}
+requestAnimationFrame(frame);
+// search
+q.addEventListener('input',()=>{filt=q.value.trim().toLowerCase()});
+q.addEventListener('keydown',e=>{if(e.key==='Enter'&&q.value.trim()){const v=q.value.trim(),f=N.find(n=>n.n.toLowerCase().includes(v.toLowerCase()));openT(f?f.n:v)}});
+// placeholder typing
+const PH=["укладывать волосы","программировать","играть на гитаре","рисовать","готовить пасту","инвестировать","говорить по-немецки","снимать видео"];
+let pi=0,pc=0,pd=false;(function ty(){const w=PH[pi];q.placeholder=w.slice(0,pc);if(!pd&&pc<w.length){pc++;setTimeout(ty,80)}else if(!pd){pd=true;setTimeout(ty,1500)}else if(pc>0){pc--;setTimeout(ty,35)}else{pd=false;pi=(pi+1)%PH.length;setTimeout(ty,250)}})();
+// lesson panel
+function openT(name){const node=N.find(n=>n.n===name),e=encodeURIComponent(name);PC.textContent='';
+ const mk=(tag,txt,cls)=>{const el=document.createElement(tag);if(txt)el.textContent=txt;if(cls)el.className=cls;PC.appendChild(el);return el};
+ mk('h2',name);mk('p',D[name]||`Короткий план, с чего начать изучение темы «${name}».`);
+ mk('h3','Урок: 4 шага');const ol=mk('ol');
+ ["Разберитесь с ключевыми понятиями и терминами.","Посмотрите вводную лекцию или пройдите короткий курс.","Сделайте маленький практический проект.","Объясните тему другому: так видны пробелы."].forEach(s=>{const li=document.createElement('li');li.textContent=s;ol.appendChild(li)});
+ mk('h3','Материалы');const l=mk('div','','l');
+ [["Wikipedia","https://ru.wikipedia.org/w/index.php?search="+e],["YouTube","https://www.youtube.com/results?search_query="+e+"+курс"],["Khan Academy","https://www.khanacademy.org/search?page_search_query="+e],["Coursera","https://www.coursera.org/search?query="+e],["Stepik","https://stepik.org/catalog/search?query="+e]].forEach(([n,u])=>{const a=document.createElement('a');a.textContent=n;a.href=u;a.target='_blank';a.rel='noopener';l.appendChild(a)});
+ if(node&&node.nb.length){mk('h3','Связанные темы');const r=mk('div','','r');node.nb.slice(0,8).forEach(j=>{const s=document.createElement('span');s.textContent=N[j].n;s.onclick=()=>openT(N[j].n);r.appendChild(s)})}
+ P.classList.add('on')}
+document.getElementById('x').onclick=()=>P.classList.remove('on');
+addEventListener('keydown',e=>{if(e.key==='Escape')P.classList.remove('on')});
+</script>
+</body>
+</html>
