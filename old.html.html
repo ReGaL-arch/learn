@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Веб с нуля: бесплатный курс HTML, CSS и JavaScript</title>
+<meta name="description" content="Бесплатный курс для новичков: 18 уроков по HTML, CSS и JavaScript, мини-игры, тесты и итоговый проект. Без регистрации.">
+<meta property="og:title" content="Веб с нуля: курс HTML, CSS и JavaScript">
+<meta property="og:description" content="18 уроков, игры, тесты и достижения. Учитесь верстать и программировать прямо в браузере.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0f19">
+<style>
+:root{--bg:#0a0f19;--fg:#e8ecf5;--mut:#9aa6bd;--card:rgba(14,21,36,.95);--bd:rgba(232,236,245,.14);--ac:#ff7a45;--ac2:#5ec2ff;--code:#070b13;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3f6fc;--fg:#101828;--mut:#4a5670;--card:rgba(255,255,255,.95);--bd:rgba(16,24,40,.14);--ac:#d9480f;--ac2:#0b6bcb;--code:#eaeff8}}
+:root[data-theme="light"]{--bg:#f3f6fc;--fg:#101828;--mut:#4a5670;--card:rgba(255,255,255,.95);--bd:rgba(16,24,40,.14);--ac:#d9480f;--ac2:#0b6bcb;--code:#eaeff8}
+html{scroll-padding-top:calc(4.5rem + env(safe-area-inset-top,0px))}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;display:block}
+main,footer{position:relative;z-index:1}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));z-index:5}
+.w{max-width:56rem;margin:0 auto;padding:0 5vw}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+h1,h2{letter-spacing:-.025em;line-height:1.08;margin:0 0 1rem}
+h1{font-size:clamp(2.6rem,8vw,5.6rem);max-width:14ch}
+h2{font-size:clamp(1.5rem,3.4vw,2.1rem)}
+.lead{font-size:1.2rem;max-width:34rem}
+.btn,button{font:inherit;font-weight:600;cursor:pointer;display:inline-block;text-decoration:none;padding:.75rem 1.4rem;border-radius:12px;border:1px solid var(--ac);background:var(--ac);color:var(--on,#0a0f19);margin:.4rem .5rem 0 0}
+.btn.o,button.o{background:transparent;color:var(--ac)}
+.btn:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--ac2);outline-offset:3px}
+.part{margin:5rem 0 1.5rem;color:var(--ac2);font-size:1rem;font-weight:600}
+article{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:1.6rem;margin:0 0 1.5rem;}
+.n{display:inline-grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--ac);color:var(--on,#0a0f19);font-weight:700;margin-right:.6rem;font-size:1rem}
+p{margin:0 0 1rem;color:var(--mut)}
+.task{color:var(--fg);border-left:3px solid var(--ac2);padding-left:1rem}
+pre{margin:1rem 0;padding:1rem;background:var(--code);border:1px solid var(--bd);border-radius:12px;overflow-x:auto;font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--fg)}
+textarea{width:100%;height:16rem;background:var(--code);color:var(--fg);border:1px solid var(--bd);border-radius:12px;padding:1rem;font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;resize:vertical}
+iframe{width:100%;height:14rem;border:1px solid var(--bd);border-radius:12px;background:#fff;margin-top:1rem}
+footer{padding:3rem 5vw;color:var(--mut);text-align:center}
+h1{background:linear-gradient(120deg,var(--fg) 30%,var(--ac2));-webkit-background-clip:text;background-clip:text;color:transparent}
+#toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:4;display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;gap:.4rem;align-items:center;padding:.6rem .8rem;margin:0 0 1.5rem;background:var(--card);border:1px solid var(--bd);border-radius:14px;}
+#toc a{padding:.15rem .6rem;border-radius:8px;color:var(--ac2);text-decoration:none;border:1px solid var(--bd)}
+#tc{margin-right:auto;color:var(--mut);font-size:.95rem}
+article.ok{border-color:var(--ac2)}
+#quiz div{margin-bottom:1.2rem}#quiz button{display:block;margin:.4rem 0}
+details{margin:0 0 1rem;color:var(--mut)}summary{cursor:pointer;color:var(--ac2);font-weight:600;margin-bottom:.6rem}
+.mq button{display:block;margin:.3rem 0}
+#gb{display:flex;height:180px;gap:8px;border:2px dashed var(--bd);border-radius:12px;padding:8px;margin:1rem 0}
+#gb i{width:44px;height:44px;border-radius:10px;background:var(--ac)}
+#gi,.gin{font:inherit;padding:.6rem;border-radius:10px;border:1px solid var(--bd);background:var(--code);color:var(--fg);width:100%;max-width:20rem}
+.gx{display:grid;gap:4px;border:2px dashed var(--bd);border-radius:12px;padding:8px;margin:1rem 0}
+.gx i{height:36px;width:70%;border-radius:10px;background:var(--ac2)}
+.gx.sel{display:block;color:var(--fg)}.sel *{margin:.3rem 0}
+.sel .hit{outline:3px solid var(--ac);background:rgba(255,122,69,.25)}
+article h3{margin:1rem 0 0;color:var(--ac2);font-size:1.05rem}
+@keyframes pulse{50%{opacity:.3;transform:scale(1.1)}}
+.an{max-width:180px}
+.qq div{margin-bottom:1.2rem}.qq button{display:block;margin:.4rem 0}
+#fxe{height:7rem}
+.up{position:fixed;right:12px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:6;width:2.6rem;height:2.6rem;padding:0;margin:0;border-radius:50%;background:var(--card);color:var(--fg);border:1px solid var(--bd);display:none}.up.s{display:block}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ac);color:var(--on,#0a0f19);padding:.6rem 1.2rem;border-radius:99px;font-weight:600;z-index:7;display:none;max-width:90vw;text-align:center}
+#xb{height:10px;border-radius:99px;background:var(--bd);overflow:hidden}#xb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .5s}
+#bd{display:grid;grid-template-columns:repeat(auto-fill,minmax(9rem,1fr));gap:.6rem;margin-top:1rem}
+.bg{padding:.6rem .7rem;border:1px solid var(--bd);border-radius:12px;opacity:.45;font-size:.9rem;color:var(--mut)}.bg.on{opacity:1;border-color:var(--ac2);color:var(--fg)}.bg b{display:block;color:var(--fg)}
+#cbe{height:6rem}#spq{color:var(--fg);font-weight:600;min-height:1.6em}
+footer button{margin:.4rem}
+#toc a,#tc{white-space:nowrap;flex:none}
+#toc{background:var(--bg);scrollbar-color:var(--ac) transparent}
+select.th{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:6;padding:.45rem .7rem;border-radius:12px;background:var(--bg);color:var(--fg);border:1px solid var(--bd);font:inherit;font-size:.95rem;cursor:pointer}
+:root[data-theme="light"],:root[data-theme="pink"]{--on:#fff}
+:root[data-theme="violet"]{--bg:#120a24;--fg:#f1eaff;--mut:#b6a6d9;--card:rgba(30,16,60,.95);--bd:rgba(241,234,255,.16);--ac:#b78cff;--ac2:#ff8fd8;--code:#0d0719}
+:root[data-theme="pink"]{--bg:#fff0f6;--fg:#3b0a24;--mut:#8a4a67;--card:rgba(255,255,255,.95);--bd:rgba(59,10,36,.14);--ac:#c2185b;--ac2:#7b2fd0;--code:#ffe0ee}
+:root[data-theme="red"]{--bg:#1a0709;--fg:#ffecec;--mut:#d9a3a6;--card:rgba(42,12,16,.95);--bd:rgba(255,236,236,.16);--ac:#ff4d57;--ac2:#ffb347;--code:#120406}
+:root[data-theme="blue"]{--bg:#06162b;--fg:#e6f2ff;--mut:#9db9d9;--card:rgba(10,32,64,.95);--bd:rgba(230,242,255,.16);--ac:#4db3ff;--ac2:#5df0c6;--code:#041021}
+:root[data-theme="green"]{--bg:#08180f;--fg:#e8fff1;--mut:#9fcdb0;--card:rgba(12,40,24,.95);--bd:rgba(232,255,241,.16);--ac:#3ddc84;--ac2:#f2d14b;--code:#051109}
+#history{padding:6vh 0 2rem}
+#history .sub{font-size:1.15rem;color:var(--fg);max-width:40rem}
+.edn{display:inline-block;padding:.2rem .8rem;border:1px solid var(--bd);border-radius:99px;color:var(--ac2);font-size:.9rem;margin-bottom:1rem}
+.brow{width:100%;max-width:34rem;display:block;margin:1.2rem 0}
+.trio{display:grid;grid-template-columns:repeat(auto-fit,minmax(14rem,1fr));gap:1rem;margin:1.5rem 0}
+.trio div{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:1.2rem}
+.trio svg{width:100%;height:84px;margin-bottom:.5rem}
+.trio h3{margin:0 0 .4rem;font-size:1.3rem;color:var(--fg)}
+.trio b{color:var(--ac2)}
+.sa{fill:none;stroke:var(--ac);stroke-width:3}.sb{fill:none;stroke:var(--ac2);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.sf{fill:var(--ac)}.sg{fill:var(--ac2)}.sh{fill:var(--fg);opacity:.5}.sl{stroke:var(--fg);stroke-width:4;stroke-linecap:round}
+ol.tl{list-style:none;margin:2rem 0;padding:0;border-left:3px solid var(--bd)}
+.tl li{position:relative;padding:0 0 1.1rem 1.5rem;color:var(--mut)}
+.tl li:before{content:"";position:absolute;left:-9px;top:.5rem;width:15px;height:15px;border-radius:50%;background:var(--ac)}
+.tl b{color:var(--fg);margin-right:.6rem;font-size:1.05rem}
+.fact{background:var(--card);border:1px solid var(--ac2);border-radius:16px;padding:1rem 1.2rem;color:var(--fg)}
+:root[data-theme="mint"],:root[data-theme="lavender"]{--on:#fff}
+:root[data-theme="mint"]{--bg:#eafff6;--fg:#06312a;--mut:#3d6e63;--card:rgba(255,255,255,.95);--bd:rgba(6,49,42,.14);--ac:#0b8a69;--ac2:#2a7de1;--code:#d3f7e8}
+:root[data-theme="sunset"]{--bg:#1d0f1f;--fg:#fff0ea;--mut:#e0b3b8;--card:rgba(48,20,40,.95);--bd:rgba(255,240,234,.16);--ac:#ff8a4c;--ac2:#ff5d8f;--code:#150a17}
+:root[data-theme="lavender"]{--bg:#f4f0ff;--fg:#241a4a;--mut:#665a94;--card:rgba(255,255,255,.95);--bd:rgba(36,26,74,.14);--ac:#6a45e0;--ac2:#d4469b;--code:#e8e0ff}
+:root[data-theme="amber"]{--bg:#17110a;--fg:#fff5e1;--mut:#d6c19a;--card:rgba(40,30,16,.95);--bd:rgba(255,245,225,.16);--ac:#ffb020;--ac2:#4fd1c5;--code:#100b06}
+.btn,button{border-radius:999px;border-width:1.5px;letter-spacing:.01em;box-shadow:0 8px 20px -12px var(--ac);transition:transform .15s,box-shadow .15s,background .15s,color .15s}
+.btn:hover,button:hover{transform:translateY(-2px);box-shadow:0 12px 24px -12px var(--ac)}
+.btn:active,button:active{transform:translateY(0) scale(.98)}
+.btn.o,button.o{box-shadow:none}
+textarea,#gi,.gin,#nm{border-radius:14px;transition:border-color .15s,box-shadow .15s}
+textarea:focus-visible,#gi:focus-visible,.gin:focus-visible,#nm:focus-visible{outline:none;border-color:var(--ac);box-shadow:0 0 0 3px color-mix(in srgb,var(--ac) 30%,transparent)}
+.gx,#gb{counter-reset:n}
+.gx i,#gb i{counter-increment:n;display:grid;place-items:center;font-style:normal;font-weight:700;color:var(--on,#0a0f19)}
+.gx i{min-width:40px;width:auto}
+.gx i::after,#gb i::after{content:counter(n)}
+button.thb{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:8;margin:0;padding:.5rem 1.1rem;background:var(--bg);color:var(--fg);border:1px solid var(--bd);box-shadow:0 8px 24px -10px rgba(0,0,0,.45)}
+button.thb:hover{background:var(--bg);color:var(--fg);border-color:var(--ac)}
+#thp{position:fixed;top:calc(58px + env(safe-area-inset-top,0px));right:12px;z-index:8;display:none;grid-template-columns:1fr 1fr;gap:.45rem;padding:.7rem;width:min(21rem,calc(100vw - 24px));max-height:calc(100vh - 90px);overflow:auto;background:var(--bg);border:1px solid var(--bd);border-radius:22px;box-shadow:0 24px 60px -18px rgba(0,0,0,.55)}
+#thp.open{display:grid}
+button.chip{display:flex;align-items:center;justify-content:flex-start;gap:.6rem;margin:0;padding:.5rem .8rem;border-radius:14px;background:transparent;color:var(--fg);border:1px solid var(--bd);box-shadow:none;font-weight:500;font-size:.95rem}
+button.chip:hover{background:var(--card);color:var(--fg);transform:none;border-color:var(--ac);box-shadow:none}
+button.chip[aria-pressed="true"]{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac)}
+.sw{width:1.5rem;height:1.5rem;border-radius:50%;flex:none;border:2px solid var(--bd)}
+button.th{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:6;margin:0;padding:.4rem .9rem;background:var(--card);color:var(--fg);border-color:var(--bd)}
+#cert{display:none;text-align:center}#cert.show{display:block}
+.diploma{border:2px solid var(--ac);border-radius:16px;padding:2rem;margin:1rem 0;background:var(--code)}
+#nm{font:inherit;padding:.6rem;border-radius:10px;border:1px solid var(--bd);background:var(--code);color:var(--fg);width:100%;max-width:20rem}
+@media print{canvas,#toc,#bar,.th,.thb,#thp,footer,.w>*:not(#cert),#cert>*:not(.diploma){display:none!important}#cert{display:block}body{background:#fff;color:#000}.diploma{border-color:#000}}
+</style>
+</head>
+<body>
+<canvas id="c" aria-hidden="true"></canvas>
+<div id="bar"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<noscript><p style="padding:2rem">Для работы курса включите JavaScript в браузере.</p></noscript>
+<button class="thb" id="thb" type="button" aria-haspopup="true" aria-expanded="false" aria-controls="thp">🎨 Тема</button>
+<div id="thp" role="group" aria-label="Выбор темы"></div>
+<button class="up" id="up" aria-label="Наверх">↑</button>
+<main>
+<div class="w">
+<header class="hero">
+<h1>Веб с нуля: HTML, CSS и JavaScript</h1>
+<p class="lead">Полный курс на одной странице: 18 уроков, живой редактор кода, итоговый проект, четыре мини-игры, режим «исправь ошибку», шпаргалку и тесты по частям. В каждом уроке есть раздел «Подробнее для новичка» и быстрая проверка. Зарабатывайте опыт, собирайте достижения и поднимайтесь от новичка до мастера. Курс бесплатный, регистрация не нужна. Читайте, запускайте примеры и меняйте их прямо здесь.</p>
+<div><a class="btn" href="#lessons">Начать курс</a><a class="btn o" href="#lab">Открыть редактор</a></div>
+</header>
+<section id="history">
+<span class="edn">Издание курса: ноябрь 2026</span>
+<h2>Хроника веба: как родились HTML, CSS и JavaScript</h2>
+<p class="sub">Три языка, на которых построен почти каждый сайт. Узнайте, когда они появились, кто их придумал и зачем, прежде чем писать свой первый код.</p>
+<svg class="brow" viewBox="0 0 340 170" role="img" aria-label="Окно браузера с сайтом"><rect class="sa" x="4" y="4" width="332" height="162" rx="14"/><path class="sa" d="M4 36h332"/><circle class="sf" cx="24" cy="20" r="5"/><circle class="sg" cx="42" cy="20" r="5"/><circle class="sh" cx="60" cy="20" r="5"/><rect class="sa" x="84" y="11" width="236" height="18" rx="9"/><rect class="sf" x="22" y="56" width="120" height="14" rx="7"/><rect class="sh" x="22" y="82" width="190" height="8" rx="4"/><rect class="sh" x="22" y="100" width="160" height="8" rx="4"/><rect class="sg" x="22" y="126" width="84" height="24" rx="12"/><circle class="sa" cx="262" cy="104" r="40"/><circle class="sf" cx="262" cy="104" r="22"/></svg>
+<div class="trio">
+<div><svg viewBox="0 0 120 80" role="img" aria-label="Значок HTML"><rect class="sa" x="6" y="6" width="108" height="68" rx="10"/><path class="sb" d="M44 28 26 40l18 12M76 28l18 12-18 12"/><path class="sl" d="M66 24 54 56"/></svg><h3>HTML</h3><p><b>Выход:</b> 1991. HTML5: 2014.</p><p>Придумал Тим Бернерс-Ли в ЦЕРН. Это язык разметки: он сообщает браузеру, где заголовок, где абзац, а где ссылка.</p></div>
+<div><svg viewBox="0 0 120 80" role="img" aria-label="Палитра CSS"><circle class="sf" cx="40" cy="44" r="22"/><circle class="sg" cx="68" cy="32" r="22" opacity=".85"/><circle class="sh" cx="86" cy="52" r="20"/></svg><h3>CSS</h3><p><b>Выход:</b> 1996. Идея: 1994.</p><p>Предложил Хокон Виум Ли. Первая спецификация CSS1 вышла в декабре 1996 года. Отвечает за цвета, шрифты и раскладку.</p></div>
+<div><svg viewBox="0 0 120 80" role="img" aria-label="Молния JavaScript"><path class="sf" d="M68 6 30 46h24l-8 28 40-44H62z"/><circle class="sa" cx="60" cy="40" r="34"/></svg><h3>JavaScript</h3><p><b>Выход:</b> 1995. Стандарт: 1997.</p><p>Брендан Эйх написал первую версию в Netscape примерно за десять дней, в мае 1995 года. Оживляет страницу: кнопки, игры, анимации.</p></div>
+</div>
+<ol class="tl">
+<li><b>1989</b>Тим Бернерс-Ли предлагает идею Всемирной паутины.</li>
+<li><b>1991</b>В августе первый сайт становится доступен всем.</li>
+<li><b>1993</b>Браузер Mosaic делает интернет популярным: на страницах появляются картинки.</li>
+<li><b>1994</b>Хокон Виум Ли предлагает каскадные таблицы стилей (CSS).</li>
+<li><b>1995</b>Рождается JavaScript, а в декабре он выходит в Netscape Navigator 2.0. Выходит HTML 2.0.</li>
+<li><b>1996</b>Опубликована первая спецификация CSS (CSS1).</li>
+<li><b>1997</b>JavaScript становится стандартом ECMAScript.</li>
+<li><b>1999</b>Выходит HTML 4.01: на нём строили сайты много лет.</li>
+<li><b>2014</b>HTML5 становится официальной рекомендацией W3C.</li>
+<li><b>2015</b>Стандарт ES2015: let, const, стрелочные функции и классы.</li>
+</ol>
+<p class="fact"><b>Знаете ли вы?</b> JavaScript не имеет отношения к языку Java: название выбрали из маркетинговых соображений. А копию самого первого сайта можно открыть по адресу info.cern.ch.</p>
+</section>
+<article id="ach"><h2>Ваш прогресс</h2><p>Идите по порядку: прочитайте урок, запустите код в редакторе, ответьте на вопрос и отметьте урок пройденным. Игры и тесты доступны сразу.</p><p id="rk" class="task"></p><div id="xb" role="progressbar" aria-label="Опыт"><i></i></div><div id="bd"></div></article>
+<nav id="toc" aria-label="Уроки"><span id="tc"></span></nav>
+<div id="lessons"></div>
+<h2 class="part" id="games">Мини-игра: Flexbox</h2>
+<article><p id="gt" class="task"></p><div id="gb"><i></i><i></i><i></i></div><input id="gi" placeholder="Например: flex-start" aria-label="Значение CSS" autocomplete="off"><p id="gm" class="task"></p></article>
+<h2 class="part">Мини-игра: CSS Grid</h2>
+<article><p id="g2t" class="task"></p><div id="g2b" class="gx"><i></i><i></i><i></i><i></i><i></i><i></i></div><input id="g2i" class="gin" placeholder="Например: 1fr 2fr" aria-label="Значение CSS" autocomplete="off"><p id="g2m" class="task"></p></article>
+<h2 class="part">Мини-игра: селекторы</h2>
+<article><p id="g3t" class="task"></p><div id="g3b" class="gx sel"></div><input id="g3i" class="gin" placeholder="Например: .card" aria-label="CSS-селектор" autocomplete="off"><p id="g3m" class="task"></p></article>
+<h2 class="part">Мини-игра: CSS-анимации</h2>
+<article><p id="g4t" class="task"></p><div id="g4b" class="gx an"><i></i></div><input id="g4i" class="gin" placeholder="Например: rotate(10deg)" aria-label="Значение CSS" autocomplete="off"><p id="g4m" class="task"></p></article>
+<h2 class="part">Комбо: Flexbox и Grid вместе</h2>
+<article><p id="cbt" class="task"></p><div id="cbb" class="gx"><i></i><i></i><i></i></div><textarea id="cbe" spellcheck="false" aria-label="CSS-код" placeholder="display: flex; justify-content: center;"></textarea><p id="cbm" class="task"></p></article>
+<h2 class="part">Исправь ошибку в коде</h2>
+<article><p id="fxt" class="task"></p><textarea id="fxe" spellcheck="false" aria-label="Код с ошибкой"></textarea><button id="fxc">Проверить</button><button class="o" id="fxh">Подсказка</button><p id="fxm" class="task"></p></article>
+<h2 class="part" id="cheat">Шпаргалка</h2>
+<article><p>Самое нужное на одной странице.</p><h3>HTML</h3><pre id="cs1"></pre><h3>CSS</h3><pre id="cs2"></pre><h3>JavaScript</h3><pre id="cs3"></pre></article>
+<h2 class="part" id="lab">Редактор кода</h2>
+<article>
+<p>Нажмите «В редактор» у любого урока или пишите свой код. Кнопка «Запустить» обновляет результат ниже.</p>
+<textarea id="ed" spellcheck="false" aria-label="Редактор кода"></textarea>
+<button id="run">Запустить</button>
+<iframe id="fr" sandbox="allow-scripts" title="Результат"></iframe>
+</article>
+<h2 class="part">На скорость: 30 секунд</h2>
+<article><p>Отвечайте на вопросы курса как можно быстрее. Неверный ответ отнимает 3 секунды.</p><p id="spi" class="task">Нажмите «Старт».</p><p id="spq"></p><div id="spa" class="qq"></div><button id="spb">Старт</button></article>
+<h2 class="part" id="tests">Тесты по частям</h2>
+<article class="qq" id="qh"><h3>HTML</h3></article>
+<article class="qq" id="qc"><h3>CSS</h3></article>
+<article class="qq" id="qj"><h3>JavaScript</h3></article>
+<h2 class="part">Итоговый тест</h2>
+<article id="quiz"><p>Проверьте себя: выберите ответ на каждый вопрос.</p><p id="res" class="task">Результат: 0 из 20</p></article>
+<article id="cert"><h2>Ваш сертификат</h2><p>Вы прошли все уроки. Введите имя, чтобы получить сертификат.</p><input id="nm" placeholder="Ваше имя" aria-label="Ваше имя"><div class="diploma" id="dp"></div><button id="pr">Распечатать или сохранить в PDF</button></article>
+<h2 class="part">Что дальше</h2>
+<article>
+<p>Вы прошли основу. Дальше стоит изучить Git и GitHub, работу с API, TypeScript, а потом выбрать фреймворк: React, Vue или Svelte. Для 3D в браузере смотрите Three.js: именно на нём сделан фон этой страницы.</p>
+<p class="task">Практика важнее чтения: сделайте три маленьких проекта в неделю, пусть даже простых.</p>
+</article>
+</div>
+</main>
+<footer><p>Курс «Веб с нуля»: HTML, CSS и JavaScript. Бесплатно и без регистрации. Прогресс хранится только в вашем браузере.</p><button class="o" id="shr">Поделиться курсом</button><button class="o" id="rst">Сбросить прогресс</button></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function(){
+var L=[
+['Часть 1. HTML: структура страницы'],
+['h','Скелет страницы',`HTML описывает структуру страницы. Браузер читает теги сверху вниз. Обязательные части: doctype, html, head (служебное) и body (то, что видно).`,
+`<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Моя страница</title>
+</head>
+<body>
+  <h1>Привет, мир!</h1>
+  <p>Это мой первый сайт.</p>
+</body>
+</html>`,`Замените текст на свой и добавьте второй абзац.`],
+['h','Текст, ссылки и списки',`Заголовки идут от h1 до h6. Ссылка это тег a с атрибутом href. Списки бывают маркированные (ul) и нумерованные (ol).`,
+`<h2>Мои цели</h2>
+<p>Я учу <strong>HTML</strong> и <em>CSS</em>.</p>
+<ul>
+  <li>Сделать лендинг</li>
+  <li>Выучить JavaScript</li>
+</ul>
+<a href="https://developer.mozilla.org">Документация MDN</a>`,`Сделайте нумерованный список из трёх своих любимых сайтов со ссылками.`],
+['h','Семантика и формы',`Семантические теги (header, nav, main, section, footer) объясняют браузеру и поисковикам смысл блоков. Формы собирают данные: каждому input нужен label.`,
+`<header><h1>Мой блог</h1></header>
+<main>
+  <form>
+    <label>Имя <input name="name" required></label>
+    <label>Email <input type="email" name="email"></label>
+    <button>Отправить</button>
+  </form>
+</main>
+<footer>2026</footer>`,`Добавьте в форму поле пароля и флажок согласия (type="checkbox").`],
+['Часть 2. CSS: внешний вид'],
+['c','Селекторы и блочная модель',`CSS задаёт стиль через селекторы: по тегу, по классу (.card), по id (#main). Каждый элемент это коробка: content, padding, border и margin. Строка box-sizing упрощает расчёты.`,
+`*{box-sizing:border-box}
+body{font-family:system-ui;background:#f4f6fb}
+h1{color:#d9480f}
+.card{
+  padding:20px;
+  margin:16px 0;
+  border:2px solid #d9480f;
+  border-radius:16px;
+  background:white;
+}`,`Сделайте у .card тень (box-shadow) и измените цвет границы.`],
+['c','Flexbox и Grid',`Flexbox выстраивает элементы в одну линию или колонку. Grid строит двумерную сетку. Вместе они закрывают почти любую раскладку.`,
+`.row{display:flex;gap:12px;justify-content:space-between}
+.row span{flex:1;padding:16px;background:#cfe3ff;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px}`,`Поменяйте flex на grid у .row и добавьте gap побольше.`],
+['c','Переменные, адаптивность и анимации',`Переменные (--name) хранят цвета и размеры. Медиазапросы меняют стиль под ширину экрана. Transition и keyframes добавляют плавность.`,
+`:root{--ac:#d9480f}
+.card{background:var(--ac);color:white;padding:20px;
+  transition:transform .3s}
+.card:hover{transform:scale(1.05) rotate(-2deg)}
+@media (max-width:600px){h1{font-size:1.4rem}}
+@keyframes pulse{50%{opacity:.4}}
+h1{animation:pulse 2s infinite}`,`Заведите переменную для второго цвета и используйте её у .row span.`],
+['Часть 3. JavaScript: поведение'],
+['j','Переменные, условия, циклы',`JavaScript оживляет страницу. Используйте const для значений, которые не меняются, и let для остальных. Условия и циклы управляют ходом программы. Здесь log выводит текст в результат.`,
+`const name = 'Аня';
+let age = 17;
+if (age >= 18) {
+  log(name + ' совершеннолетняя');
+} else {
+  log(name + ' ещё учится');
+}
+for (let i = 1; i <= 5; i++) {
+  log('Шаг ' + i);
+}`,`Выведите таблицу умножения на 7.`],
+['j','Функции, массивы и объекты',`Функция это именованный кусок кода. Массив хранит список, объект хранит пары ключ и значение. Методы map и filter обрабатывают списки без циклов.`,
+`const square = (x) => x * x;
+const nums = [1, 2, 3, 4, 5];
+log(nums.map(square).join(', '));
+log(nums.filter(n => n % 2 === 0).join(', '));
+const user = { name: 'Олег', skills: ['HTML', 'CSS'] };
+user.skills.push('JS');
+log(user.name + ': ' + user.skills.join(', '));`,`Отфильтруйте числа больше 2 и умножьте каждое на 10.`],
+['j','DOM и события',`DOM это дерево элементов страницы. Находим элемент через querySelector и вешаем обработчик через addEventListener. Так работает любая интерактивность.`,
+`const btn = document.querySelector('#btn');
+let clicks = 0;
+btn.addEventListener('click', () => {
+  clicks++;
+  btn.textContent = 'Нажато: ' + clicks;
+  document.body.style.background =
+    'hsl(' + (clicks * 40) + ' 80% 90%)';
+});`,`Покажите в out текст «Вы нажали 5 раз!», когда счётчик дойдёт до пяти.`],
+['j','Асинхронность и fetch',`Запросы к серверу идут с задержкой, поэтому код ждёт через async и await. В реальном проекте вместо искусственной паузы пишут fetch(адрес) и затем response.json(). В песочнице сеть закрыта, поэтому здесь пауза имитирует сервер.`,
+`const wait = (ms) => new Promise(r => setTimeout(r, ms));
+async function load() {
+  log('Загружаю...');
+  await wait(1000);
+  const data = { title: 'Привет из API', id: 1 };
+  log(data.title + ' (id ' + data.id + ')');
+}
+load();`,`Добавьте блок try/catch и выведите ошибку, если id равен 0.`],
+['Часть 4. Профессиональные навыки'],
+['c','Адаптивность и доступность',`Сначала проектируйте под телефон (mobile-first), затем расширяйте стили для больших экранов. Функция clamp плавно меняет размер шрифта. Доступность это видимый фокус, контраст и уважение к настройке «меньше анимации».`,
+`h1{font-size:clamp(1.4rem,5vw,3rem)}
+.row{display:grid;gap:12px}
+@media (min-width:700px){
+  .row{grid-template-columns:repeat(3,1fr)}
+}
+.card:focus-visible{outline:3px solid #0b6bcb}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}`,`Сделайте так, чтобы на узком экране колонок было две, а не одна.`],
+['j','Классы и модули',`Класс описывает шаблон объекта: поля и методы. Модули (import и export) разбивают код на файлы. Так устроены все современные проекты.`,
+`class Counter {
+  constructor(start = 0) { this.value = start; }
+  inc() { this.value++; return this; }
+  show() { log('Значение: ' + this.value); }
+}
+const c = new Counter(10);
+c.inc().inc().show();`,`Добавьте метод reset и вызовите его перед show.`],
+['c','CSS Grid: сетка на практике',`Grid делит страницу на строки и колонки. Единица fr означает долю свободного места. Элемент можно растянуть на несколько ячеек через grid-column, а запись 1 / -1 значит «от первой линии до последней».`,
+`.row{display:grid;grid-template-columns:2fr 1fr;gap:12px}
+.row span{padding:18px;background:#cfe3ff;border-radius:12px}
+.row span:nth-child(3){grid-column:1 / -1;background:#ffd8a8}
+.row span:hover{outline:3px solid #d9480f}`,`Сделайте три колонки равной ширины и растяните первый блок на две.`],
+['j','Работа с JSON и API',`JSON это текстовый формат обмена данными. JSON.parse превращает строку в объект, JSON.stringify делает обратное. С сервера данные приходят именно так: fetch(адрес), затем response.json().`,
+`const raw = '{"city":"Берлин","temp":8,"tags":["дождь","ветер"]}';
+const w = JSON.parse(raw);
+log(w.city + ': ' + w.temp + ' градусов');
+w.tags.forEach(t => log('Тег: ' + t));
+log(JSON.stringify({ ok: true, count: 3 }));`,`Добавьте в объект поле wind и выведите его.`],
+['x','Отладка и DevTools',`Нажмите F12, чтобы открыть инструменты разработчика. Вкладка Elements показывает DOM и CSS, Console выводит сообщения и ошибки, Network показывает запросы, а Sources позволяет ставить точки останова. Читайте текст ошибки: он почти всегда указывает на файл и строку.`,
+`console.log(document.title);
+console.table([{ a: 1 }, { a: 2 }]);
+console.error('Так выглядит ошибка');
+// debugger; останавливает код и открывает Sources`,`Откройте DevTools на любом сайте и найдите в Elements заголовок h1.`],
+['x','Введение в TypeScript',`TypeScript добавляет к JavaScript типы. Ошибки находятся ещё до запуска, а редактор лучше подсказывает. Код компилируется в обычный JavaScript, поэтому вы уже знаете основу.`,
+`type User = { name: string; age: number };
+function hello(u: User): string {
+  return 'Привет, ' + u.name;
+}
+hello({ name: 'Аня', age: 20 });
+// hello({ name: 'Аня' }); ошибка: нет поля age`,`Установите TypeScript командой npm i -g typescript и скомпилируйте файл через tsc.`],
+['x','Git и публикация сайта',`Git хранит историю изменений, GitHub хранит репозитории онлайн. Бесплатный хостинг статики дают GitHub Pages, Netlify и Cloudflare Pages: достаточно загрузить папку с index.html.`,
+`git init
+git add .
+git commit -m "Первый коммит"
+git branch -M main
+git remote add origin https://github.com/ВАШ-НИК/site.git
+git push -u origin main`,`Создайте репозиторий, залейте свой сайт и включите GitHub Pages в настройках.`],
+['Итоговый проект'],
+['h','Список дел',`Соберём всё вместе: HTML задаёт структуру, CSS оформляет, JS добавляет и удаляет задачи. Запустите и доработайте.`,
+`<!DOCTYPE html>
+<html lang="ru"><head><meta charset="utf-8">
+<style>
+body{font-family:system-ui;max-width:420px;margin:2rem auto}
+li{padding:8px;cursor:pointer}
+li.done{text-decoration:line-through;opacity:.5}
+</style></head><body>
+<h1>Дела</h1>
+<input id="t" placeholder="Новая задача">
+<button id="add">Добавить</button>
+<ul id="l"></ul>
+<script>
+document.getElementById('add').onclick = () => {
+  const t = document.getElementById('t');
+  if (!t.value.trim()) return;
+  const li = document.createElement('li');
+  li.textContent = t.value;
+  li.onclick = () => li.classList.toggle('done');
+  document.getElementById('l').append(li);
+  t.value = '';
+};
+<\/script></body></html>`,`Добавьте удаление задач и сохранение в localStorage.`]
+];
+var toc=document.getElementById('toc'),tc=document.getElementById('tc');
+var D=[
+[`Браузер превращает HTML в дерево элементов. Большинство тегов парные: открывающий и закрывающий. Пустые теги вроде img и br закрывать не нужно. Сохраняйте файл с расширением .html и открывайте двойным щелчком.`,`Ctrl+S, затем F5 в браузере: так вы сразу видите изменения.`,['Где находится то, что видно на странице?',['В head','В body','В title'],1]],
+[`Заголовки задают смысл, а не размер: h1 один на страницу, дальше по порядку. Ссылка с атрибутом target со значением _blank открывается в новой вкладке, к ней добавляют rel=noopener. Картинке всегда нужен alt.`,`Пишите alt по-человечески: незрячий пользователь услышит его вместо картинки.`,['Какой тег делает нумерованный список?',['ol','ul','li'],0]],
+[`Каждому полю формы нужен label: клик по подписи ставит курсор в поле, а скринридер читает её вслух. Атрибут required не даёт отправить пустое поле, type=email проверяет формат адреса без JavaScript.`,`Правильные теги дают SEO и доступность бесплатно: не заменяйте всё на div.`,['Что делает атрибут required?',['Красит поле','Не даёт отправить пустое поле','Скрывает поле'],1]],
+[`Приоритет: id сильнее класса, класс сильнее тега. При равенстве побеждает правило, написанное ниже. Margin это внешний отступ, padding внутренний. Избегайте !important: он усложняет поддержку.`,`Правый клик на элементе, затем Inspect: видно все применённые стили.`,['Какой отступ находится внутри рамки?',['margin','padding','gap'],1]],
+[`Flexbox думает в одном направлении: есть главная и поперечная оси. justify-content работает по главной, align-items по поперечной. Grid удобен для раскладки всей страницы, flex для рядов внутри блоков.`,`Запомните: justify вдоль, align поперёк. Закрепите в мини-игре ниже.`,['Что выравнивает по поперечной оси?',['justify-content','align-items','gap'],1]],
+[`Переменные CSS наследуются и переопределяются внутри блока, на них легко делать темы. Медиазапрос min-width действует от указанной ширины и выше. Анимируйте transform и opacity: они самые плавные.`,`Не анимируйте width и top: страница начнёт тормозить на телефоне.`,['Как объявляется переменная CSS?',['$name','--name','@name'],1]],
+[`Строки пишут в кавычках, числа без них. Сравнивайте через ===: он не приводит типы. Цикл for состоит из старта, условия и шага. Следите, чтобы условие когда-нибудь стало ложным, иначе цикл бесконечен.`,`Если вкладка зависла из-за цикла, закройте её и проверьте условие и шаг.`,['Какой оператор строгого сравнения?',['=','==','==='],2]],
+[`Функция принимает параметры и возвращает результат через return. Стрелочная запись короче обычной. Массивы нумеруются с нуля: первый элемент это nums[0]. Метод map возвращает новый массив и не меняет исходный.`,`Называйте функции глаголами: calcPrice, showMenu. Код читается как текст.`,['Какой индекс у первого элемента массива?',['0','1','-1'],0]],
+[`Скрипт должен запускаться, когда страница уже прочитана: подключайте его в конце body или добавьте атрибут defer. Событие это сигнал вроде click, input или submit. Для вставки текста безопаснее textContent, чем innerHTML.`,`Не знаете, что нашёл querySelector? Выведите результат в console.log.`,['Какой метод вешает обработчик события?',['addEventListener','appendChild','setAttribute'],0]],
+[`Асинхронный код не блокирует страницу: пока идёт запрос, остальное продолжает работать. Промис это обещание результата, await ждёт его внутри async-функции. Оборачивайте запросы в try/catch: сеть может отказать.`,`Смотрите вкладку Network в DevTools: там статус и ответ каждого запроса.`,['Внутри чего используют await?',['Обычной функции','async-функции','Стиля CSS'],1]],
+[`Mobile-first значит: сначала простая вёрстка для телефона, затем улучшения через min-width. Контраст текста и фона должен быть не ниже 4,5 к 1. У всех кнопок и ссылок должен быть видимый фокус для работы с клавиатурой.`,`Пройдите страницу клавишей Tab: если не видно, где вы, добавьте :focus-visible.`,['Что значит mobile-first?',['Сначала вёрстка для телефона','Только для телефонов','Без CSS'],0]],
+[`Конструктор вызывается при new и задаёт начальные значения, this указывает на текущий объект. Если метод возвращает this, вызовы можно записывать цепочкой. В модуле всё, что не экспортировано, остаётся приватным для файла.`,`Один файл, одна задача: так проект не превращается в кашу.`,['Какое слово создаёт объект из класса?',['make','new','create'],1]],
+[`Grid строится из линий: запись 1 / -1 охватывает всю ширину. Связка repeat(auto-fit, minmax(...)) даёт адаптивную сетку без медиазапросов. Gap задаёт промежутки и заменяет margin между ячейками.`,`Для каталога карточек хватит одной строки с auto-fit и minmax.`,['Что означает 1fr?',['Один пиксель','Одну долю свободного места','Одну строку'],1]],
+[`В JSON строки и ключи только в двойных кавычках, комментариев нет. Лишняя запятая ломает разбор, поэтому проверяйте данные валидатором. API это адрес, по которому программа получает данные от сервера.`,`Откройте любой публичный API в браузере: JSON видно прямо на странице.`,['Какие кавычки обязательны в JSON?',['Одинарные','Двойные','Любые'],1]],
+[`Ошибка в консоли показывает файл и номер строки: начните с первой красной. Точка останова останавливает код, и вы смотрите значения переменных по шагам. Правки в Elements временные и пропадут после обновления.`,`Ctrl+Shift+M включает режим телефона: проверяйте адаптивность без телефона.`,['Какая вкладка показывает запросы к серверу?',['Network','Elements','Console'],0]],
+[`TypeScript проверяет типы до запуска и лучше подсказывает в редакторе. Типы задают параметрам, результатам и объектам. Браузер TypeScript не понимает: файл сначала компилируется в JavaScript.`,`Включите strict в tsconfig: ошибок больше, зато привычки лучше.`,['Во что компилируется TypeScript?',['В JavaScript','В HTML','В CSS'],0]],
+[`Коммит это снимок проекта с сообщением. Пишите, что изменилось и зачем. Команда git status показывает изменения, git log историю. Файл .gitignore исключает лишнее, например папку node_modules.`,`Делайте маленькие коммиты часто: ошибки легче найти и откатить.`,['Что показывает git status?',['Историю','Состояние изменений','Адрес сайта'],1]],
+[`Проект объединяет три слоя: HTML создаёт поле и список, CSS оформляет и зачёркивает выполненное, JS добавляет задачи и реагирует на клик. Ищите баги по шагам: найден ли элемент, сработал ли обработчик.`,`Улучшите проект: добавьте удаление, сохранение в localStorage и фильтры.`,['Какой слой отвечает за поведение?',['HTML','CSS','JavaScript'],2]]
+];
+var GL=[['justify-content','Сдвиньте блоки в центр по горизонтали','center'],['justify-content','Разведите блоки к краям с равными промежутками','space-between'],['flex-direction','Расставьте блоки в колонку','column'],['align-items','Прижмите блоки к низу контейнера','flex-end'],['gap','Задайте промежутки между блоками 24px','24px'],['justify-content','Прижмите блоки к правому краю (значение начинается с flex-)','flex-end'],['align-items','Расположите блоки по центру по вертикали','center'],['flex-direction','Расставьте блоки в колонку в обратном порядке','column-reverse']],gl=0,gb=document.getElementById('gb'),gi=document.getElementById('gi'),gt=document.getElementById('gt'),gm2=document.getElementById('gm');
+function lvl(){var q2=GL[gl];gb.style.cssText='';gi.value='';gt.textContent='Уровень '+(gl+1)+' из '+GL.length+': '+q2[1]+'. Впишите значение свойства '+q2[0]+'.';gm2.textContent=''}
+gi.oninput=function(){var q2=GL[gl],v=gi.value.trim().toLowerCase();gb.style.setProperty(q2[0],v);if(v===q2[2]){gm2.textContent=gl<GL.length-1?'Верно! Следующий уровень...':'Вы прошли все уровни!';if(gl<GL.length-1){gl++;setTimeout(lvl,900)}}};lvl();
+function mk(p,LV){var b=document.getElementById(p+'b'),i=document.getElementById(p+'i'),t=document.getElementById(p+'t'),m=document.getElementById(p+'m'),l=0;
+ function show(){var q=LV[l];b.style.cssText=q[3]||'';i.value='';t.textContent='Уровень '+(l+1)+' из '+LV.length+': '+q[1]+'. Впишите значение свойства '+q[0]+'.';m.textContent=''}
+ i.oninput=function(){var q=LV[l],v=i.value.replace(/\s/g,'').toLowerCase();b.style.setProperty(q[0],i.value);if(q[2].indexOf(v)>-1){m.textContent=l<LV.length-1?'Верно! Следующий уровень...':'Вы прошли все уровни!';if(l<LV.length-1){l++;setTimeout(show,900)}}};show()}
+mk('g2',[['grid-template-columns','Сделайте три колонки равной ширины',['1fr1fr1fr','repeat(3,1fr)']],['gap','Сделайте промежутки между ячейками 20px',['20px'],'grid-template-columns:repeat(3,1fr)'],['grid-template-columns','Сделайте две колонки: первая вдвое шире второй',['2fr1fr']],['justify-items','Центрируйте содержимое ячеек по горизонтали',['center'],'grid-template-columns:repeat(3,1fr)'],['grid-template-columns','Сделайте колонки: первая 100px, вторая занимает остальное',['100px1fr']],['row-gap','Сделайте вертикальные промежутки 30px',['30px'],'grid-template-columns:repeat(3,1fr)'],['align-items','Прижмите содержимое к низу ячейки',['end','flex-end'],'grid-template-columns:repeat(3,1fr);grid-auto-rows:80px']]);
+var sb=document.getElementById('g3b'),si=document.getElementById('g3i'),st=document.getElementById('g3t'),sm2=document.getElementById('g3m'),sl=0,
+SL=[['Выберите все абзацы','p'],['Выберите всё с классом a','.a'],['Выберите элемент с id x','#x'],['Выберите только li с классом a','li.a'],['Выберите все li внутри ul','ul li']];
+sb.innerHTML='<p>Абзац 1</p><p class="a">Абзац 2</p><div class="a">Блок</div><ul><li>Раз</li><li id="x">Два</li><li class="a">Три</li></ul>';
+function clr(){sb.querySelectorAll('.hit').forEach(function(e){e.classList.remove('hit')})}
+function sshow(){st.textContent='Уровень '+(sl+1)+' из '+SL.length+': '+SL[sl][0]+'. Впишите CSS-селектор.';si.value='';sm2.textContent='';clr()}
+si.oninput=function(){clr();var got=[],want=Array.from(sb.querySelectorAll(SL[sl][1]));try{got=Array.from(sb.querySelectorAll(si.value.trim()||'#none'))}catch(e){}
+ got.forEach(function(e){e.classList.add('hit')});
+ if(got.length&&got.length===want.length&&got.every(function(e){return want.indexOf(e)>-1})){sm2.textContent=sl<SL.length-1?'Верно! Следующий уровень...':'Вы прошли все уровни!';if(sl<SL.length-1){sl++;setTimeout(sshow,900)}}};sshow();
+var CS=[['cs1','h1-h6  заголовки\np  абзац\na href  ссылка\nimg src alt  картинка\nul, ol, li  списки\nform, label, input, button  формы\nheader, nav, main, section, footer  структура'],
+['cs2','color, background, font-size  текст и цвет\nmargin, padding, border  отступы и рамка\ndisplay:flex; gap; justify-content; align-items\ndisplay:grid; grid-template-columns\n@media (min-width:700px) { }  адаптивность\n:hover, :focus-visible  состояния\ntransition, transform  плавность'],
+['cs3','const, let  переменные\nif / else, for, while  логика и циклы\nfunction f(a) { return a }  функции\narr.map, arr.filter, arr.find  массивы\ndocument.querySelector(\'.x\')  поиск элемента\nel.addEventListener(\'click\', fn)  события\nel.textContent, el.classList.toggle  изменения\nJSON.parse, JSON.stringify  данные']];
+CS.forEach(function(c){document.getElementById(c[0]).textContent=c[1]});
+mk('g4',[['transform','Поверните блок на 45 градусов',['rotate(45deg)']],['transform','Увеличьте блок в 1.5 раза',['scale(1.5)','scale(1.5,1.5)']],['transform','Сдвиньте блок на 40px вправо',['translatex(40px)','translate(40px,0)','translate(40px)']],['opacity','Сделайте блок наполовину прозрачным',['0.5','.5']],['transform','Поверните блок на пол-оборота',['rotate(180deg)','rotate(0.5turn)','rotate(.5turn)']],['filter','Размойте блок на 4px',['blur(4px)']],['transform','Сожмите блок вдвое',['scale(0.5)','scale(.5)']],['animation','Запустите анимацию pulse длительностью 1s бесконечно',['pulse1sinfinite','pulseinfinite1s','1spulseinfinite']]]);
+var FX=[['В HTML опечатка: ссылка не работает. Исправьте.','<a hef="https://example.com">Ссылка</a>',/href\s*=/,'Атрибут с адресом называется href.'],
+['В CSS опечатка: цвет не применяется. Исправьте.','.box { colour: red; }',/\bcolor\s*:/,'Правильное слово: color.'],
+['Константу нельзя переприсваивать. Исправьте код.','const x = 5;\nx = 6;',/let\s+x/,'Замените const на let.'],
+['Условие всегда истинно. Исправьте сравнение.','if (a = 1) { log(1); }',/a\s*={2,3}\s*1/,'Нужно сравнивать, а не присваивать.'],
+['У картинки нет описания. Исправьте.','<img src="cat.jpg">',/\balt\s*=/,'Добавьте атрибут alt с описанием.'],
+['Выравнивание не работает: опечатка в значении. Исправьте.','.row { display: flex; justify-content: centre; }',/justify-content\s*:\s*center/,'Слово пишется center.'],
+['Нужно вывести последний элемент массива. Исправьте индекс.','const nums = [1, 2, 3];\nlog(nums[3]);',/nums\[2\]|nums\.length\s*-\s*1/,'Индексы начинаются с нуля.'],
+['Функция ничего не возвращает. Исправьте.','function add(a, b) { a + b; }',/return\s+a\s*\+\s*b/,'Добавьте слово return.'],
+['В CSS пропущено двоеточие. Исправьте.','h1 { color blue; }',/color\s*:\s*blue/,'Между свойством и значением нужно двоеточие.']],fl=0,
+fe=document.getElementById('fxe'),ft=document.getElementById('fxt'),fm=document.getElementById('fxm');
+function fshow(){ft.textContent='Задача '+(fl+1)+' из '+FX.length+': '+FX[fl][0];fe.value=FX[fl][1];fm.textContent=''}
+document.getElementById('fxc').onclick=function(){if(FX[fl][2].test(fe.value)&&fe.value!==FX[fl][1]){fm.textContent=fl<FX.length-1?'Верно! Следующая задача...':'Вы исправили все ошибки!';if(fl<FX.length-1){fl++;setTimeout(fshow,900)}}else fm.textContent='Пока не то. Попробуйте ещё или откройте подсказку.'};
+document.getElementById('fxh').onclick=function(){fm.textContent='Подсказка: '+FX[fl][3]};fshow();
+function qz2(id,Qs){var box=document.getElementById(id),s2=0,an=0,r=document.createElement('p');r.className='task';r.textContent='Результат: 0 из '+Qs.length;
+ Qs.forEach(function(q,i){var d=document.createElement('div'),h=document.createElement('p');h.className='task';h.textContent=(i+1)+'. '+q[0];d.appendChild(h);
+  q[1].forEach(function(o,j){var b=document.createElement('button');b.className='o';b.textContent=o;
+   b.onclick=function(){if(d.dataset.d)return;d.dataset.d=1;an++;var ok=j===q[2];if(ok)s2++;b.textContent=o+(ok?'  ✓ верно':'  ✗ неверно');if(!ok)d.children[q[2]+1].textContent+='  ← правильный ответ';r.textContent='Результат: '+s2+' из '+Qs.length+(an===Qs.length?'. Готово!':'')};
+   d.appendChild(b)});box.appendChild(d)});box.appendChild(r)}
+qz2('qh',[['Какой тег задаёт главный заголовок страницы?',['h6','h1','head'],1],['Какой атрибут задаёт адрес ссылки?',['src','href','alt'],1],['Какой тег связывает подпись с полем формы?',['label','legend','title'],0],['Что должно быть первой строкой HTML-файла?',['<!DOCTYPE html>','<head>','<body>'],0],['Какой тег создаёт абзац?',['p','br','pre'],0]]);
+qz2('qc',[['Что делает box-sizing: border-box?',['Рисует рамку','Включает padding и border в ширину','Скрывает элемент'],1],['Как написать селектор класса box?',['.box','#box','box'],0],['Какое свойство даёт плавное изменение значения?',['transition','float','position'],0],['Что сильнее по приоритету: класс или тег?',['Тег','Класс','Одинаково'],1],['Какая единица зависит от размера шрифта?',['px','rem','pt-fixed'],1]]);
+qz2('qj',[['Что делает метод push?',['Удаляет первый элемент','Добавляет элемент в конец массива','Сортирует массив'],1],['Как объявить константу?',['let','const','set'],1],['Что вернёт Boolean(0)?',['true','false','null'],1],['Как вывести сообщение в консоль?',['print()','console.log()','echo()'],1],['Какой индекс у последнего элемента массива из 4 элементов?',['3','4','5'],0]]);
+[['history','История'],['games','Игры'],['tests','Тесты'],['cheat','Шпаргалка'],['lab','Редактор']].forEach(function(x){var li=document.createElement('a');li.href='#'+x[0];li.textContent=x[1];toc.appendChild(li)});
+var upb=document.getElementById('up');addEventListener('scroll',function(){upb.classList.toggle('s',scrollY>800)});upb.onclick=function(){scrollTo({top:0,behavior:'smooth'})};
+var A={},ready=false,last='',toastEl=document.getElementById('toast'),bd=document.getElementById('bd'),rk=document.getElementById('rk'),xb=document.querySelector('#xb i');
+try{A=JSON.parse(localStorage.getItem('wa')||'{}')}catch(e){}
+var BG=[['l1','Первый шаг','Пройден 1 урок'],['l9','Полпути','Пройдено 9 уроков'],['lall','Выпускник','Пройдены все уроки'],['gm','Мастер Flexbox','Игра пройдена'],['g2m','Мастер Grid','Игра пройдена'],['g3m','Снайпер селекторов','Игра пройдена'],['g4m','Аниматор','Игра пройдена'],['cbm','Комбинатор','Комбо пройдено'],['fxm','Багхантер','Все ошибки исправлены'],['quiz','Отличник','18 и больше в итоговом тесте'],['speed','Молния','5 верных за 30 секунд']];
+function toast(t){toastEl.textContent=t;toastEl.style.display='block';clearTimeout(toast.k);toast.k=setTimeout(function(){toastEl.style.display='none'},3500)}
+function paint(){var ls=document.querySelectorAll('#lessons article.ok').length,nb=0;bd.textContent='';
+ BG.forEach(function(b){var on=!!A[b[0]];if(on)nb++;var d=document.createElement('div'),h=document.createElement('b');d.className='bg'+(on?' on':'');h.textContent=(on?'★ ':'☆ ')+b[1];d.append(h,b[2]);bd.appendChild(d)});
+ var xp=ls*5+nb*15,mx=n*5+BG.length*15,R=xp>=180?'Мастер':xp>=100?'Разработчик':xp>=40?'Кодер':'Новичок';
+ rk.textContent='Ранг: '+R+'. Опыт: '+xp+' из '+mx+'. Пройдено уроков: '+ls+' из '+n+'.';xb.style.width=Math.min(100,xp/mx*100)+'%'}
+function award(id){if(A[id])return;A[id]=1;try{localStorage.setItem('wa',JSON.stringify(A))}catch(e){}
+ if(ready)BG.forEach(function(b){if(b[0]===id)toast('Достижение: '+b[1])});last=''}
+function chk(){var ls=document.querySelectorAll('#lessons article.ok').length;if(ls>=1)award('l1');if(ls>=9)award('l9');if(n&&ls===n)award('lall');
+ ['gm','g2m','g3m','g4m','fxm','cbm'].forEach(function(id){var e=document.getElementById(id);if(e&&/прошли все|исправили все/.test(e.textContent))award(id)});
+ var m=/Результат: (\d+) из/.exec(res.textContent);if(m&&+m[1]>=18&&/завершён/.test(res.textContent))award('quiz');
+ var sig=ls+'|'+Object.keys(A).length;if(sig!==last){last=sig;paint()}}
+var CB=[['Центрируйте блоки по горизонтали и вертикали',function(c){return c.display==='flex'&&c.justifyContent==='center'&&c.alignItems==='center'}],
+['Сделайте сетку из 3 колонок с промежутком 10px',function(c){return c.display==='grid'&&c.gridTemplateColumns.split(' ').length===3&&c.columnGap==='10px'}],
+['Расставьте блоки в колонку и выровняйте по центру',function(c){return c.display==='flex'&&c.flexDirection==='column'&&c.alignItems==='center'}],
+['Сделайте сетку из двух колонок, вторая вдвое шире первой',function(c){var a=c.gridTemplateColumns.split(' ').map(parseFloat);return c.display==='grid'&&a.length===2&&Math.abs(a[1]/a[0]-2)<.05}]];
+var cbl=0,cbb=document.getElementById('cbb'),cbe=document.getElementById('cbe'),cbt=document.getElementById('cbt'),cbm=document.getElementById('cbm');
+function cbshow(){cbt.textContent='Уровень '+(cbl+1)+' из '+CB.length+': '+CB[cbl][0]+'. Пишите CSS через точку с запятой.';cbe.value='';cbb.style.cssText='';cbm.textContent=''}
+cbe.oninput=function(){cbb.style.cssText=cbe.value;if(CB[cbl][1](getComputedStyle(cbb))){cbm.textContent=cbl<CB.length-1?'Верно! Следующий уровень...':'Вы прошли все уровни!';if(cbl<CB.length-1){cbl++;setTimeout(cbshow,1000)}}};cbshow();
+var spq=document.getElementById('spq'),spa=document.getElementById('spa'),spi=document.getElementById('spi'),sps=0,spt=0,spk=0,best=0;
+try{best=+localStorage.getItem('wsb')||0}catch(e){}
+function spNext(){var q=Q[Math.floor(Math.random()*Q.length)];spq.textContent=q[0];spa.textContent='';
+ q[1].forEach(function(o,j){var b=document.createElement('button');b.className='o';b.textContent=o;b.onclick=function(){if(j===q[2])sps++;else spt-=3;spi.textContent='Счёт: '+sps+'. Время: '+Math.max(spt,0)+' с.';if(spt>0)spNext()};spa.appendChild(b)})}
+document.getElementById('spb').onclick=function(){sps=0;spt=30;spi.textContent='Счёт: 0. Время: 30 с.';clearInterval(spk);spNext();
+ spk=setInterval(function(){spt--;if(spt<=0){clearInterval(spk);spa.textContent='';if(sps>best){best=sps;try{localStorage.setItem('wsb',best)}catch(e){}}spq.textContent='Время вышло! Счёт: '+sps+'. Рекорд: '+best+'.';if(sps>=5)award('speed')}else spi.textContent='Счёт: '+sps+'. Время: '+spt+' с.'},1000)};
+document.getElementById('shr').onclick=function(){var s=document.getElementById('shr'),d={title:document.title,url:location.href};if(navigator.share){navigator.share(d).catch(function(){})}else{copyText(d.url,function(){s.textContent='Ссылка скопирована'},function(){s.textContent=d.url})}};
+document.getElementById('rst').onclick=function(){if(confirm('Сбросить весь прогресс?')){try{localStorage.removeItem('wc');localStorage.removeItem('wa');localStorage.removeItem('wsb')}catch(e){}location.reload()}};
+
+var saved=[];try{saved=JSON.parse(localStorage.getItem('wc')||'[]')}catch(e){}
+function copyText(t,ok,fail){function fb(){var a=document.createElement('textarea');a.value=t;a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var r=false;try{r=document.execCommand('copy')}catch(e){}a.remove();r?ok():fail()}
+ try{navigator.clipboard.writeText(t).then(ok,fb)}catch(e){fb()}}
+function cnt(){var ok=document.querySelectorAll('#lessons article.ok'),ids=[];ok.forEach(function(e){ids.push(e.id)});
+ tc.textContent='Пройдено: '+ok.length+' из '+n;
+ try{localStorage.setItem('wc',JSON.stringify(ids))}catch(e){}
+ var ce=document.getElementById('cert');if(ce)ce.classList.toggle('show',ok.length===n&&n>0)}
+var root=document.getElementById('lessons'),ed=document.getElementById('ed'),fr=document.getElementById('fr'),n=0;
+var CSSDOC='<h1>Заголовок</h1><div class="card">Карточка</div><div class="row grid"><span>1</span><span>2</span><span>3</span></div>';
+function wrap(k,c){
+ if(k==='h')return c;
+ if(k==='c')return '<style>'+c+'</style>'+CSSDOC;
+ return '<pre id="out"></pre><button id="btn">Кнопка</button><script>var out=document.getElementById("out");function log(t){out.textContent+=t+"\\n"}'+c+'<\/script>';
+}
+function run(){fr.srcdoc=ed.value}
+document.getElementById('run').onclick=run;
+L.forEach(function(x){
+ if(x.length===1){var h=document.createElement('h2');h.className='part';h.textContent=x[0];root.appendChild(h);return}
+ n++;var a=document.createElement('article');
+ var t=document.createElement('h2');var b=document.createElement('span');b.className='n';b.textContent=n;t.append(b,x[1]);
+ var p=document.createElement('p');p.textContent=x[2];
+ var pre=document.createElement('pre');var code=document.createElement('code');code.textContent=x[3];pre.appendChild(code);
+ var tk=document.createElement('p');tk.className='task';tk.textContent='Задание: '+x[4];
+ var bt=document.createElement('button');bt.className='o';bt.textContent='В редактор';
+ bt.onclick=function(){ed.value=wrap(x[0],x[3]);run();document.getElementById('lab').scrollIntoView()};
+ var dn=document.createElement('button');dn.textContent='Урок пройден';dn.setAttribute('aria-pressed','false');
+ dn.onclick=function(){a.classList.toggle('ok');var o=a.classList.contains('ok');dn.setAttribute('aria-pressed',o);dn.textContent=o?'Пройдено ✓':'Урок пройден';cnt()};
+ var cb=document.createElement('button');cb.className='o';cb.textContent='Копировать';
+ cb.onclick=function(){copyText(x[3],function(){cb.textContent='Скопировано'},function(){cb.textContent='Выделите код и нажмите Ctrl+C'})};
+ if(saved.indexOf('l'+n)>-1){a.classList.add('ok');dn.textContent='Пройдено ✓';dn.setAttribute('aria-pressed','true')}
+ var dd=D[n-1],extra=[];
+ if(dd){var de=document.createElement('details'),sm=document.createElement('summary');sm.textContent='Подробнее для новичка';
+  var d1=document.createElement('p');d1.textContent=dd[0];var d2=document.createElement('p');d2.className='task';d2.textContent='Лайфхак: '+dd[1];de.append(sm,d1,d2);
+  var qd=document.createElement('div');qd.className='mq';var qh=document.createElement('p');qh.className='task';qh.textContent='Проверка: '+dd[2][0];qd.appendChild(qh);
+  dd[2][1].forEach(function(o,j){var qb=document.createElement('button');qb.className='o';qb.textContent=o;qb.onclick=function(){qb.textContent=o+(j===dd[2][2]?'  ✓ верно':'  ✗ попробуйте ещё')};qd.appendChild(qb)});
+  extra=[de,qd]}
+ a.append(t,p,pre,tk,...extra,cb);if(x[0]!=='x')a.append(bt);a.append(dn);
+ a.id='l'+n;root.appendChild(a);
+ var li=document.createElement('a');li.href='#l'+n;li.textContent=n;li.title=x[1];toc.appendChild(li);
+});
+ed.value=wrap('h',L[1][3]);run();cnt();
+var Q=[['Какой тег создаёт ссылку?',['<link>','<href>','<a>'],2],['Что включает режим flex?',['display:flex','position:flex','flex:on'],0],['Чем const отличается от let?',['Работает быстрее','Нельзя переназначить','Ничем'],1],['Что делает querySelector?',['Отправляет запрос','Создаёт переменную','Находит элемент по CSS-селектору'],2],['Зачем нужен медиазапрос?',['Менять стиль под размер экрана','Подключать видео','Ускорять сайт'],0],['Какая команда фиксирует изменения в Git?',['git save','git commit','git open'],1],['Какой селектор выбирает класс card?',['#card','.card','card()'],1],['Что вернёт 2 + "2" в JavaScript?',['"22"','4','Ошибку'],0],['Что делает await?',['Останавливает страницу','Ждёт результат промиса в async-функции','Удаляет переменную'],1],['Зачем нужен атрибут alt у картинки?',['Задаёт размер','Хранит ссылку','Описывает картинку текстом'],2],['Какое свойство задаёт промежутки в сетке?',['gap','space','margin-all'],0],['Что делает classList.toggle?',['Удаляет элемент','Добавляет класс или убирает, если он уже есть','Копирует стиль'],1],['Какой тег лучше подходит для главной навигации?',['div','nav','span'],1],['Что вернёт typeof 5?',['number','digit','int'],0],['Что выведет console.log(1 + 1)?',['11','2','Ошибку'],1],['Что делает метод filter?',['Меняет исходный массив','Возвращает новый массив с подходящими элементами','Сортирует массив'],1],['Что означает 100vh?',['100 пикселей','Всю высоту окна браузера','Высоту всей страницы'],1],['Какой код ответа означает «страница не найдена»?',['200','404','500'],1],['Что такое DOM?',['Язык стилей','Дерево элементов страницы','База данных'],1],['Какая команда отправляет коммиты на GitHub?',['git push','git pull','git init'],0]];
+var qz=document.getElementById('quiz'),res=document.getElementById('res'),pts0=0,ans=0;
+Q.forEach(function(q,i){var d=document.createElement('div'),h=document.createElement('p');h.className='task';h.textContent=(i+1)+'. '+q[0];d.appendChild(h);
+ q[1].forEach(function(o,j){var b=document.createElement('button');b.className='o';b.textContent=o;
+  b.onclick=function(){if(d.dataset.d)return;d.dataset.d=1;ans++;var ok=j===q[2];if(ok)pts0++;b.textContent=o+(ok?'  ✓ верно':'  ✗ неверно');if(!ok)d.children[q[2]+1].textContent+='  ← правильный ответ';res.textContent='Результат: '+pts0+' из '+Q.length+(ans===Q.length?'. Тест завершён!':'')};
+  d.appendChild(b)});qz.appendChild(d)});
+
+var dark=true;
+try{var wt=localStorage.getItem('wt');if(wt&&wt!=='auto')document.documentElement.dataset.theme=wt}catch(e){}
+try{var th0=document.documentElement.dataset.theme;dark=th0?th0==='dark':!matchMedia('(prefers-color-scheme: light)').matches}catch(e){}
+var reduce=false;try{reduce=matchMedia('(prefers-reduced-motion: reduce)').matches}catch(e){}
+var ren=new THREE.WebGLRenderer({canvas:document.getElementById('c'),alpha:true,antialias:true});
+ren.setPixelRatio(Math.min(devicePixelRatio,2));
+var sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,100);cam.position.z=9;
+var cA=dark?0xff7a45:0xd9480f,cB=dark?0x5ec2ff:0x0b6bcb;
+var ico=new THREE.Mesh(new THREE.IcosahedronGeometry(2,1),new THREE.MeshBasicMaterial({color:cA,wireframe:true,transparent:true,opacity:.55}));
+var knot=new THREE.Mesh(new THREE.TorusKnotGeometry(1.1,.3,120,16),new THREE.MeshBasicMaterial({color:cB,wireframe:true,transparent:true,opacity:.5}));
+var ring=new THREE.Mesh(new THREE.TorusGeometry(3.2,.02,8,100),new THREE.MeshBasicMaterial({color:cB,transparent:true,opacity:.6}));
+var g=new THREE.Group();g.add(ico,knot,ring);sc.add(g);
+var orb=[],om=new THREE.MeshBasicMaterial({color:cB,wireframe:true,transparent:true,opacity:.5}),gm=new THREE.OctahedronGeometry(.25);
+for(var q=0;q<24;q++){var ob=new THREE.Mesh(gm,om);ob.userData={a:q/24*6.283,r:3.6+(q%3)*.5,y:(q%5-2)*.5,s:.2+q%4*.08};g.add(ob);orb.push(ob)}
+var HX=new Float32Array(600*3);for(q=0;q<600;q++){var u=q/600*6.283*5,s2=q%2?1:-1;HX[q*3]=Math.cos(u)*1.2*s2;HX[q*3+1]=(q/600-.5)*14;HX[q*3+2]=Math.sin(u)*1.2*s2}
+var hg=new THREE.BufferGeometry();hg.setAttribute('position',new THREE.BufferAttribute(HX,3));
+var helix=new THREE.Points(hg,new THREE.PointsMaterial({size:.07,color:cA,transparent:true,opacity:.7}));helix.position.x=-7;sc.add(helix);
+var P=new Float32Array(1800*3);for(var i=0;i<P.length;i++)P[i]=(Math.random()-.5)*26;
+var pg=new THREE.BufferGeometry();pg.setAttribute('position',new THREE.BufferAttribute(P,3));
+var dust=new THREE.Points(pg,new THREE.PointsMaterial({size:.04,color:dark?0xe8ecf5:0x101828,transparent:true,opacity:.6}));
+sc.add(dust);
+function recolor(){var cs=getComputedStyle(document.documentElement),A=cs.getPropertyValue('--ac').trim(),B=cs.getPropertyValue('--ac2').trim(),F=cs.getPropertyValue('--fg').trim();
+ ico.material.color.set(A);helix.material.color.set(A);knot.material.color.set(B);ring.material.color.set(B);om.color.set(B);dust.material.color.set(F)}
+var THEMES=[['auto','Авто','#0a0f19','#f3f6fc','#ff7a45'],['dark','Тёмная','#0a0f19','#ff7a45','#5ec2ff'],['light','Светлая','#f3f6fc','#d9480f','#0b6bcb'],['violet','Фиолетовая','#120a24','#b78cff','#ff8fd8'],['pink','Розовая','#fff0f6','#c2185b','#7b2fd0'],['red','Красная','#1a0709','#ff4d57','#ffb347'],['blue','Синяя','#06162b','#4db3ff','#5df0c6'],['green','Зелёная','#08180f','#3ddc84','#f2d14b'],['mint','Мятная','#eafff6','#0b8a69','#2a7de1'],['sunset','Закат','#1d0f1f','#ff8a4c','#ff5d8f'],['lavender','Лаванда','#f4f0ff','#6a45e0','#d4469b'],['amber','Янтарная','#17110a','#ffb020','#4fd1c5']];
+var tb=document.getElementById('thb'),tp=document.getElementById('thp'),curT='auto';
+try{curT=localStorage.getItem('wt')||'auto'}catch(e){}
+function setTheme(t){var r=document.documentElement,nm='Тема';if(t==='auto')r.removeAttribute('data-theme');else r.dataset.theme=t;try{localStorage.setItem('wt',t)}catch(e){}
+ tp.querySelectorAll('.chip').forEach(function(c){var on=c.dataset.t===t;c.setAttribute('aria-pressed',on);if(on)nm=c.textContent});tb.textContent='🎨 '+nm;recolor()}
+THEMES.forEach(function(T){var b=document.createElement('button'),sw=document.createElement('span');b.type='button';b.className='chip';b.dataset.t=T[0];sw.className='sw';
+ sw.style.background='conic-gradient('+T[2]+' 0 34%,'+T[3]+' 0 67%,'+T[4]+' 0)';b.append(sw,T[1]);b.onclick=function(){setTheme(T[0]);closeP()};tp.appendChild(b)});
+function closeP(){tp.classList.remove('open');tb.setAttribute('aria-expanded','false')}
+tb.onclick=function(e){e.stopPropagation();var o=tp.classList.toggle('open');tb.setAttribute('aria-expanded',o)};
+document.addEventListener('click',function(e){if(!tp.contains(e.target))closeP()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeP()});
+setTheme(curT);
+var nm=document.getElementById('nm'),dp=document.getElementById('dp');
+function dip(){dp.textContent='';var h=document.createElement('h2');h.textContent='Сертификат';var p=document.createElement('p');p.textContent=(nm.value||'Студент')+' успешно прошёл курс «Веб с нуля»: HTML, CSS и JavaScript. '+new Date().toLocaleDateString('ru-RU');dp.append(h,p)}
+nm.oninput=dip;dip();document.getElementById('pr').onclick=function(){print()};
+function size(){var w=innerWidth,h=innerHeight;ren.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix();g.position.x=w>800?3:0;g.position.y=w>800?0:2.5;g.scale.setScalar(w>800?1:.7)}
+addEventListener('resize',size);size();
+var mx=0,my=0,sp=0;
+addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+var bar=document.getElementById('bar');
+function loop(t){
+ var m=document.documentElement.scrollHeight-innerHeight,p=m>0?Math.min(1,scrollY/m):0;
+ sp+=(p-sp)*.06;bar.style.width=(p*100)+'%';
+ var k=reduce?0:t*.00013;
+ ico.rotation.set(k+sp*3,k*1.3,0);knot.rotation.set(k*1.6,sp*4.5,k);ring.rotation.set(1.2+my,sp*2.5+mx,0);
+ g.position.z=-sp*3;orb.forEach(function(o){var d=o.userData,a=d.a+k*d.s*3+sp*2;o.position.set(Math.cos(a)*d.r,d.y,Math.sin(a)*d.r);o.rotation.x=a});helix.rotation.y=k*2+sp*1.5;helix.position.y=sp*6-3;dust.rotation.y=sp*2+k*.2;cam.position.x=mx*1.5;cam.position.y=-my;cam.lookAt(0,0,0);
+ ren.render(sc,cam);requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+chk();ready=true;setInterval(chk,1000);
+})();
+</script>
+</body>
+</html>
